@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <h1>Admin Dashboard</h1>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('admin_informasi') }}">Kelola Informasi</a></li>
+        <li><a href="{{ url_for('admin_struktur') }}">Kelola Struktur</a></li>
+        <li><a href="{{ url_for('admin_galeri') }}">Kelola Galeri</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      </ul>
+    </nav>
+    <p>Selamat datang di dashboard admin!</p>
+  </body>
+</html>
