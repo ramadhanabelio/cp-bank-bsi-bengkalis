@@ -78,15 +78,15 @@
         <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
           <div class="row gy-4">
             <div class="col-lg-6">
-              <img src="assets/img/about-company-1.jpg" class="img-fluid" alt="" />
+              <img src="{{ url_for('static', filename='img/about-company-1.jpg') }}" class="img-fluid" alt="" />
             </div>
             <div class="col-lg-6">
               <div class="row gy-4">
                 <div class="col-lg-12">
-                  <img src="assets/img/about-company-2.jpg" class="img-fluid" alt="" />
+                  <img src="{{ url_for('static', filename='img/about-company-2.jpg') }}" class="img-fluid" alt="" />
                 </div>
                 <div class="col-lg-12">
-                  <img src="assets/img/about-company-3.jpg" class="img-fluid" alt="" />
+                  <img src="{{ url_for('static', filename='img/about-company-3.jpg') }}" class="img-fluid" alt="" />
                 </div>
               </div>
             </div>
@@ -144,15 +144,15 @@
         <div class="col-lg-6">
           <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
             <div class="tab-pane fade active show" id="features-tab-1">
-              <img src="assets/img/tabs-1.jpg" alt="" class="img-fluid" />
+              <img src="{{ url_for('static', filename='img/tabs-1.jpg') }}" alt="" class="img-fluid" />
             </div>
 
             <div class="tab-pane fade" id="features-tab-2">
-              <img src="assets/img/tabs-2.jpg" alt="" class="img-fluid" />
+              <img src="{{ url_for('static', filename='img/tabs-2.jpg') }}" alt="" class="img-fluid" />
             </div>
 
             <div class="tab-pane fade" id="features-tab-3">
-              <img src="assets/img/tabs-3.jpg" alt="" class="img-fluid" />
+              <img src="{{ url_for('static', filename='img/tabs-3.jpg') }}" alt="" class="img-fluid" />
             </div>
           </div>
         </div>
@@ -178,7 +178,6 @@
             <div>
               <h3>Nesciunt Mete</h3>
               <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-              <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -190,7 +189,6 @@
             <div>
               <h3>Eosle Commodi</h3>
               <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-              <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -202,7 +200,6 @@
             <div>
               <h3>Ledo Markt</h3>
               <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-              <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -214,7 +211,6 @@
             <div>
               <h3>Asperiores Commodi</h3>
               <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -226,7 +222,6 @@
             <div>
               <h3>Velit Doloremque.</h3>
               <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-              <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -238,7 +233,6 @@
             <div>
               <h3>Dolori Architecto</h3>
               <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-              <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -263,7 +257,7 @@
           <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
             <i class="bi bi-geo-alt"></i>
             <h3>Address</h3>
-            <p>A108 Adam Street, New York, NY 535022</p>
+            <p>Jl. Hangtuah, Bengkalis Kota,</p>
           </div>
         </div>
         <!-- End Info Item -->
@@ -271,7 +265,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
             <i class="bi bi-telephone"></i>
-            <h3>Call Us</h3>
+            <h3>Customer Service</h3>
             <p>+1 5589 55488 55</p>
           </div>
         </div>
@@ -280,7 +274,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
             <i class="bi bi-envelope"></i>
-            <h3>Email Us</h3>
+            <h3>Email</h3>
             <p>info@example.com</p>
           </div>
         </div>
@@ -301,7 +295,7 @@
         <!-- End Google Maps -->
 
         <div class="col-lg-6">
-          <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+          <form action="" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
             <div class="row gy-4">
               <div class="col-md-6">
                 <input type="text" name="name" class="form-control" placeholder="Your Name" required="" />
@@ -341,11 +335,11 @@
     <div class="row gy-4">
       <div class="col-lg-4 col-md-6 footer-about">
         <a href="index.html" class="logo d-flex align-items-center">
-          <span class="sitename">QuickStart</span>
+          <span class="sitename">Bank Syariah Indonesia KCP Duri Hangtuah 1</span>
         </a>
         <div class="footer-contact pt-3">
-          <p>A108 Adam Street</p>
-          <p>New York, NY 535022</p>
+          <p>Jl. Hangtuah, Bengkalis Kota</p>
+          <p>Kec. Bengkalis, Kabupaten Bengkalis, Riau 28713</p>
           <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
           <p><strong>Email:</strong> <span>info@example.com</span></p>
         </div>
@@ -358,43 +352,35 @@
       </div>
 
       <div class="col-lg-2 col-md-3 footer-links">
-        <h4>Useful Links</h4>
+        <h4>Navigasi</h4>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Terms of service</a></li>
-          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#produk">Produk</a></li>
+          <li><a href="#layanan">Layanan</a></li>
         </ul>
       </div>
 
       <div class="col-lg-2 col-md-3 footer-links">
-        <h4>Our Services</h4>
+        <h4>Layanan Kami</h4>
         <ul>
-          <li><a href="#">Web Design</a></li>
-          <li><a href="#">Web Development</a></li>
-          <li><a href="#">Product Management</a></li>
-          <li><a href="#">Marketing</a></li>
-          <li><a href="#">Graphic Design</a></li>
+          <li><a href="#">Tarik Tunai</a></li>
+          <li><a href="#">Setor Tunai</a></li>
+          <li><a href="#">Buka Rekening Online</a></li>
+          <li><a href="#">Daftar BSI Mobile</a></li>
         </ul>
       </div>
 
       <div class="col-lg-4 col-md-12 footer-newsletter">
-        <h4>Our Newsletter</h4>
-        <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-        <form action="forms/newsletter.php" method="post" class="php-email-form">
-          <div class="newsletter-form"><input type="email" name="email" /><input type="submit" value="Subscribe" /></div>
-          <div class="loading">Loading</div>
-          <div class="error-message"></div>
-          <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-        </form>
+        <h4>Customer Satisfaction Survey</h4>
+        <a href="https://serviceultimaterace.bankbsi.co.id/css/?outlet=ID0010227" target="_blank" class="btn btn-link text-decoration-none">Tekan disini!</a>
       </div>
     </div>
   </div>
 
   <div class="container copyright text-center mt-4">
-    <p>© <span>Copyright</span> <strong class="px-1 sitename">QuickStart</strong><span>All Rights Reserved</span></p>
-    <div class="credits">Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a></div>
+    <p>© <span>Copyright</span> <strong class="px-1 sitename">Ca1 Team</strong><span>All Rights Reserved</span></p>
+    <!-- <div class="credits">Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a></div> -->
   </div>
 </footer>
 {% endblock %}

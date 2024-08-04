@@ -6,7 +6,7 @@
       <h1 class="mb-2 mb-lg-0">Galeri</h1>
       <nav class="breadcrumbs">
         <ol>
-          <li><a href="index.html">Beranda</a></li>
+          <li><a href="{{ url_for('beranda') }}">Beranda</a></li>
           <li class="current">Galeri</li>
         </ol>
       </nav>
@@ -19,12 +19,61 @@
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
       <h2>Galeri</h2>
-      <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      <p>Berikut adalah dokumentasi kegiatan dari Bank BSI Bengkalis</p>
     </div>
     <!-- End Section Title -->
 
     <div class="container" data-aos="fade-up">
-      <p>Use this page as a starter for your own custom pages.</p>
+      <div class="row">
+        <!-- Card 1 -->
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ url_for('static', filename='img/features-1.jpg') }}" class="card-img-top rounded" alt="Card image 1" />
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ url_for('static', filename='img/features-1.jpg') }}" class="card-img-top rounded" alt="Card image 2" />
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ url_for('static', filename='img/features-1.jpg') }}" class="card-img-top rounded" alt="Card image 3" />
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ url_for('static', filename='img/features-1.jpg') }}" class="card-img-top rounded" alt="Card image 4" />
+          </div>
+        </div>
+        <!-- Card 1 -->
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ url_for('static', filename='img/features-1.jpg') }}" class="card-img-top rounded" alt="Card image 1" />
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ url_for('static', filename='img/features-1.jpg') }}" class="card-img-top rounded" alt="Card image 2" />
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ url_for('static', filename='img/features-1.jpg') }}" class="card-img-top rounded" alt="Card image 3" />
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ url_for('static', filename='img/features-1.jpg') }}" class="card-img-top rounded" alt="Card image 4" />
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   <!-- /Starter Section Section -->
