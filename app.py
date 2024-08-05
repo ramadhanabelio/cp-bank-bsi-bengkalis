@@ -120,7 +120,6 @@ def admin_dashboard():
     connection = db_connection()
     cursor = connection.cursor(dictionary=True)
 
-    # Count the number of records in each table
     cursor.execute('SELECT COUNT(*) AS count FROM informasi')
     informasi_count = cursor.fetchone()['count']
 
@@ -335,6 +334,7 @@ def delete_struktur(id):
 
     return redirect(url_for('admin_struktur'))
 
+# Route Admin Galeri
 @app.route('/admin/galeri', methods=['GET', 'POST'])
 def admin_galeri():
     if 'logged_in' not in session:
@@ -422,7 +422,6 @@ def edit_galeri(id):
         flash('Galeri updated successfully!', 'success')
         return redirect(url_for('admin_galeri'))
 
-    # Fetch the current details of the gallery item
     cursor.execute('SELECT * FROM galeri WHERE id = %s', (id,))
     galeri_item = cursor.fetchone()
     cursor.close()
