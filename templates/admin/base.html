@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin BSI</title>
+    <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon" />
+    <!-- CSS Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <!-- Icon Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.bootstrap5.css" />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+  </head>
+  <body>
+    <!-- Navbar Start -->
+    <header class="navbar navbar-white sticky-top bg-white flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand text-center col-md-3 col-lg-2 me-0 px-3 fs-6" href="/dashboard">
+        <img src="{{ url_for('static', filename='img/bsi.svg') }}" class="mb-2" alt="Logo BSI" width="120px" />
+      </a>
+      <button class="navbar-toggler position-absolute d-md-none collapsed border-0" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <input class="form-control form-control-white bg-white w-100 rounded-0 border-0" type="text" disabled />
+      <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+          <a class="nav-link px-3 text-danger" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"> <span data-feather="log-out" class="align-text-bottom"></span> Keluar </a>
+        </div>
+      </div>
+    </header>
+    <!-- Navbar End -->
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar Start -->
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="position-sticky pt-3 sidebar-sticky">
+            <ul class="nav flex-column mt-3">
+              <li class="nav-item">
+                <a class="nav-link {% if request.path == '/dashboard' %}active{% endif %}" href="{{ url_for('admin_dashboard') }}">
+                  <span data-feather="home" class="align-text-bottom"></span>
+                  Beranda
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.path == '/sertifikat' %}active{% endif %}" href="{{ url_for('admin_informasi') }}">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Kelola Informasi
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.path == '/sertifikat' %}active{% endif %}" href="{{ url_for('admin_struktur') }}">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Kelola Struktur
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.path == '/sertifikat' %}active{% endif %}" href="{{ url_for('admin_galeri') }}">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Kelola Galeri
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- Sidebar End -->
+
+        <!-- Main Content Start -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-5">
+          <!-- Partials Content Start -->
+          {% block content %} {% endblock %}
+          <!-- Partials Content End -->
+        </main>
+        <!-- Main Content End -->
+      </div>
+    </div>
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">Konfirmasi</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">Apakah Anda yakin ingin keluar?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Keluar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <!-- Feather Icon -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script>
+    <!-- My JS -->
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+  </body>
+</html>

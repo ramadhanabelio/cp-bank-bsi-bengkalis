@@ -2,28 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank BSI Bengkalis</title>
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon" />
+    <!-- CSS Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
   </head>
   <body>
-    <h2>Login Admin</h2>
+    <div class="card shadow border-0 m-4">
+      <div class="row no-gutters">
+        <div class="col-md-6 image-container d-none d-md-block">
+          <img src="{{ url_for('static', filename='img/tabs-1.jpg') }}" class="img-fluid" alt="Login Background" />
+          <div class="image-text">
+            <h4 class="fw-normal">SELAMAT DATANG</h4>
+            <hr class="line" />
+            <h3 class="">Company Profile</h3>
+            <h3 class="fw-bold">Bank BSI Bengkalis</h3>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body m-3">
+            <div class="container text-center">
+              <img src="{{ url_for('static', filename='img/bsi.svg') }}" class="mb-3" alt="Logo BSI" width="170px" />
+              <h3 class="card-title text-center mt-4 mb-3">Masuk</h3>
+              <!-- <h5 class="fw-light text-info">BSI Bengkalis</h5> -->
+              <!-- <hr /> -->
+            </div>
+            {% if error %}
+            <div class="alert alert-danger text-center" role="alert">{{ error }}</div>
+            {% endif %}
+            <form method="POST" action="{{ url_for('admin_login') }}">
+              <div class="form-group mb-3">
+                <label for="username" class="fw-medium mb-2">Username <span class="text-danger">*</span></label>
+                <input type="text" class="form-control border-0 border-bottom no-rounded-corners" id="username" name="username" placeholder="Masukkan username" required />
+              </div>
+              <div class="form-group mb-4">
+                <label for="password" class="fw-medium mb-2">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control border-0 border-bottom no-rounded-corners" id="password" name="password" placeholder="Masukkan password" required />
+              </div>
+              <button type="submit" class="btn btn-custom rounded-pill w-100 text-white fw-semibold">MASUK</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
-    <ul>
-      {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
-
-    <form action="{{ url_for('admin_login') }}" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required />
-
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
-
-      <button type="submit">Login</button>
-    </form>
+    <!-- JS Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   </body>
 </html>
