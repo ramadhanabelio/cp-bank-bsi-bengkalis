@@ -204,8 +204,8 @@ h6 {
   transition: 0.3s;
 }
 
-.btn-getstarted:hover,
-.btn-getstarted:focus:hover {
+.btn-link:hover,
+.btn-link:focus:hover {
   color: var(--contrast-color);
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
