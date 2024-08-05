@@ -9,16 +9,16 @@
 
 /* Card */
 
-.bg-c-blue {
-  background: linear-gradient(45deg, #11caf0, #bdf4ff);
+.bg-c-cyan {
+  background: linear-gradient(45deg, #019e9b, #00deda);
 }
 
 .bg-c-yellow {
-  background: linear-gradient(45deg, #fff204, #fffbac);
+  background: linear-gradient(45deg, #f8ad3b, #ffc368);
 }
 
-.bg-c-red {
-  background: linear-gradient(45deg, #ed1c25, #ff959a);
+.bg-c-blue {
+  background: linear-gradient(45deg, #75aaff, #9cc0f9);
 }
 
 .card {
@@ -184,4 +184,19 @@
 .form-control-dark:focus {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+.btn-custom {
+  background-color: #019e9b;
+  color: white;
+}
+
+.btn-custom:focus {
+  background-color: #00c0c0;
+  color: white;
+}
+
+.btn-custom:hover {
+  background-color: #017a7a;
+  color: white;
 }

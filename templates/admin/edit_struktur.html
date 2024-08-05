@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %} {% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h2>Edit Struktur</h2>
+</div>
+
+<form action="{{ url_for('edit_struktur', id=struktur_item.id) }}" method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="nama" class="form-label">Nama <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" id="nama" name="nama" value="{{ struktur_item.nama }}" required />
+  </div>
+  <div class="mb-3">
+    <label for="posisi" class="form-label">Posisi <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" id="posisi" name="posisi" value="{{ struktur_item.posisi }}" required />
+  </div>
+  <div class="mb-3">
+    <label for="gambar" class="form-label">Gambar</label>
+    <input type="file" class="form-control" id="gambar" name="gambar" />
+    <img src="{{ url_for('uploaded_file', filename=struktur_item.gambar) }}" alt="Current Image" width="200" class="mt-4" />
+  </div>
+  <div class="d-flex justify-content-end">
+    <button type="submit" class="btn btn-custom">Simpan</button>
+  </div>
+</form>
+{% endblock %}

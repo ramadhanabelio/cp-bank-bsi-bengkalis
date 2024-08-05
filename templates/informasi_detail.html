@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %}
+<main class="main mt-5 pt-5">
+  <!-- Page Title -->
+  <div class="page-title" data-aos="fade">
+    <div class="container d-lg-flex justify-content-between align-items-center">
+      <h1 class="mb-2 mb-lg-0">{{ informasi_item.judul }}</h1>
+      <nav class="breadcrumbs">
+        <ol>
+          <li><a href="{{ url_for('beranda') }}">Beranda</a></li>
+          <li><a href="{{ url_for('informasi') }}">Informasi</a></li>
+          <li class="current">{{ informasi_item.judul }}</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <!-- End Page Title -->
+
+  <!-- Informasi Detail Section -->
+  <section id="informasi-detail-section" class="informasi-detail-section section">
+    <div class="container" data-aos="fade-up">
+      <!-- <h2 class="mb-3">{{ informasi_item.judul }}</h2> -->
+      {% if informasi_item.gambar %}
+      <img src="{{ url_for('uploaded_file', filename=informasi_item.gambar) }}" class="img-fluid mb-4" style="height: 300px; object-fit: cover" alt="{{ informasi_item.judul }}" />
+      {% endif %}
+      <p class="text-muted mb-3">Tanggal: {{ informasi_item.tanggal }}</p>
+      <p>{{ informasi_item.isi|safe }}</p>
+    </div>
+  </section>
+  <!-- End Informasi Detail Section -->
+</main>
+{% endblock %}

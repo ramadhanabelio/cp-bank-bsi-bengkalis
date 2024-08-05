@@ -1,5 +1,68 @@
 {% extends "admin/base.html" %} {% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h2>Struktur</h2>
+  <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#addModal">+ Tambah</button>
 </div>
+
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Tambah Struktur</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('admin_struktur') }}" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="nama" class="form-label">Nama <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="nama" name="nama" required />
+          </div>
+          <div class="mb-3">
+            <label for="posisi" class="form-label">Posisi <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="posisi" name="posisi" required />
+          </div>
+          <div class="mb-3">
+            <label for="gambar" class="form-label">Gambar</label>
+            <input type="file" class="form-control" id="gambar" name="gambar" />
+          </div>
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-info text-white">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table id="dataTable" class="table table-striped">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Nama</th>
+      <th>Posisi</th>
+      <th>Gambar</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in struktur_list %}
+    <tr>
+      <th>{{ loop.index }}.</th>
+      <td>{{ item.nama }}</td>
+      <td>{{ item.posisi }}</td>
+      <td><img src="{{ url_for('uploaded_file', filename=item.gambar) }}" alt="{{ item.nama }}" style="width: 100px" /></td>
+      <td>
+        <a href="{{ url_for('edit_struktur', id=item.id) }}" class="badge bg-warning text-dark ms-2">
+          <i class="bi bi-pencil"></i>
+        </a>
+        <form action="{{ url_for('delete_struktur', id=item.id) }}" method="POST" style="display: inline">
+          <span class="badge bg-danger ms-2" onclick="if(confirm('Apakah Anda yakin ingin menghapus ini?')) { this.closest('form').submit(); }">
+            <i class="bi bi-trash"></i>
+          </span>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

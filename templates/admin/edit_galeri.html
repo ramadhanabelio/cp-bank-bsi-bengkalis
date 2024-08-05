@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %} {% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h2>Edit Dokumentasi</h2>
+</div>
+
+<form action="{{ url_for('edit_galeri', id=galeri_item.id) }}" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{{ galeri_item.id }}" />
+  <div class="mb-3">
+    <label for="edit-file" class="form-label">Foto</label>
+    <input type="file" class="form-control" id="edit-file" name="file" />
+    {% if galeri_item.foto %}
+    <div>
+      <img src="{{ url_for('uploaded_file', filename=galeri_item.foto) }}" class="img-thumbnail mt-3" alt="Foto" width="200" />
+    </div>
+    {% endif %}
+  </div>
+  <div class="mb-3">
+    <label for="edit-keterangan" class="form-label">Keterangan</label>
+    <input type="text" class="form-control" id="edit-keterangan" name="keterangan" value="{{ galeri_item.keterangan }}" />
+  </div>
+  <div class="d-flex justify-content-end">
+    <button type="submit" class="btn btn-custom">Simpan</button>
+  </div>
+</form>
+{% endblock %}

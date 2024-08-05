@@ -6,7 +6,7 @@
       <h1 class="mb-2 mb-lg-0">Informasi</h1>
       <nav class="breadcrumbs">
         <ol>
-          <li><a href="index.html">Beranda</a></li>
+          <li><a href="{{ url_for('beranda') }}">Beranda</a></li>
           <li class="current">Informasi</li>
         </ol>
       </nav>
@@ -14,19 +14,32 @@
   </div>
   <!-- End Page Title -->
 
-  <!-- Starter Section Section -->
-  <section id="starter-section" class="starter-section section">
+  <!-- Informasi Section -->
+  <section id="informasi-section" class="informasi-section section">
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
       <h2>Informasi</h2>
-      <p>Berita dan informasi terkini dari Bank BSI Bengkalis</p>
+      <p>Berikut adalah informasi dan berita kegiatan dari Bank BSI Bengkalis</p>
     </div>
     <!-- End Section Title -->
 
     <div class="container" data-aos="fade-up">
-      <p>Use this page as a starter for your own custom pages.</p>
+      <div class="row">
+        {% for informasi in informasi_list %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm border-0" style="cursor: pointer" onclick="window.location='{{ url_for('informasi_detail', id=informasi.id) }}'">
+            {% if informasi.gambar %}
+            <img src="{{ url_for('uploaded_file', filename=informasi.gambar) }}" class="card-img-top" style="object-fit: cover; height: 200px" alt="{{ informasi.judul }}" />
+            {% endif %}
+            <div class="card-body d-flex flex-column align-items-center">
+              <h5 class="card-title text-center mt-2">{{ informasi.judul }}</h5>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </section>
-  <!-- /Starter Section Section -->
+  <!-- End Informasi Section -->
 </main>
 {% endblock %}

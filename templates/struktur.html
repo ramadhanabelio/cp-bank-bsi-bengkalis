@@ -6,7 +6,7 @@
       <h1 class="mb-2 mb-lg-0">Struktur</h1>
       <nav class="breadcrumbs">
         <ol>
-          <li><a href="index.html">Beranda</a></li>
+          <li><a href="{{ url_for('beranda') }}">Beranda</a></li>
           <li class="current">Struktur</li>
         </ol>
       </nav>
@@ -14,7 +14,7 @@
   </div>
   <!-- End Page Title -->
 
-  <!-- Starter Section Section -->
+  <!-- Starter Section -->
   <section id="starter-section" class="starter-section section">
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
@@ -24,9 +24,22 @@
     <!-- End Section Title -->
 
     <div class="container" data-aos="fade-up">
-      <p>Use this page as a starter for your own custom pages.</p>
+      <div class="row">
+        {% for item in struktur_list %}
+        <div class="col-md-4 mb-4">
+          <div class="d-flex flex-column align-items-center text-center">
+            <!-- Circular image -->
+            <img src="{{ url_for('uploaded_file', filename=item.gambar) }}" alt="{{ item.nama }}" class="rounded-circle mb-2" style="width: 220px; height: 220px; object-fit: cover" />
+            <!-- Name -->
+            <h6 class="mt-2 mb-1">{{ item.nama }}</h6>
+            <!-- Position -->
+            <p class="fw-bold">{{ item.posisi }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </section>
-  <!-- /Starter Section Section -->
+  <!-- /Starter Section -->
 </main>
 {% endblock %}

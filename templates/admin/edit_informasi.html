@@ -1,0 +1,30 @@
+{% extends "admin/base.html" %} {% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h2>Edit Informasi</h2>
+</div>
+
+<form action="{{ url_for('edit_informasi', id=informasi_item.id) }}" method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="judul" class="form-label">Judul <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" id="judul" name="judul" value="{{ informasi_item.judul }}" required />
+  </div>
+  <div class="mb-3">
+    <label for="isi" class="form-label">Isi <span class="text-danger">*</span></label>
+    <textarea class="form-control" id="isi" name="isi" required>{{ informasi_item.isi }}</textarea>
+  </div>
+  <div class="mb-3">
+    <label for="tanggal" class="form-label">Tanggal <span class="text-danger">*</span></label>
+    <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ informasi_item.tanggal }}" required />
+  </div>
+  <div class="mb-3">
+    <label for="gambar" class="form-label">Gambar</label>
+    <input type="file" class="form-control" id="gambar" name="gambar" />
+    {% if informasi_item.gambar %}
+    <img src="{{ url_for('uploaded_file', filename=informasi_item.gambar) }}" class="img-thumbnail mt-3" width="200" />
+    {% endif %}
+  </div>
+  <div class="d-flex justify-content-end">
+    <button type="submit" class="btn btn-custom">Update</button>
+  </div>
+</form>
+{% endblock %}
