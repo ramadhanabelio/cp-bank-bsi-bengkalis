@@ -20,9 +20,6 @@ app.config['MYSQL_DB'] = os.getenv('MYSQL_DB')
 
 logging.basicConfig(level=logging.DEBUG)
 
-# dummy_username = 'admin'
-# dummy_password = 'password123'
-
 def db_connection():
     try:
         connection = mysql.connector.connect(
@@ -86,19 +83,11 @@ def admin_login():
                 connection.close()
         
     return render_template('admin/login.html', error=error)
-
-# @app.route('/admin/dashboard')
-# def admin_dashboard():
-#     if 'logged_in' in session:
-#         return render_template('admin/dashboard.html')
-#     else:
-#         flash('Anda harus login terlebih dahulu!', 'warning')
-#         return redirect(url_for('admin_login'))
     
 @app.route('/admin/dashboard')
 def admin_dashboard():
     if 'logged_in' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('admin_login'))
     return render_template('admin/dashboard.html')
 
 @app.route('/admin/informasi')
@@ -112,12 +101,6 @@ def admin_struktur():
 @app.route('/admin/galeri')
 def admin_galeri():
     return render_template('admin/galeri.html')
-
-# @app.route('/logout')
-# def logout():
-#     session.pop('logged_in', None)
-#     flash('Anda telah berhasil logout.', 'success')
-#     return redirect(url_for('admin_login'))
 
 @app.route('/logout')
 def logout():
