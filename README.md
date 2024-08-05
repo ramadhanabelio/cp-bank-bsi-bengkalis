@@ -4,19 +4,19 @@
 
 ##
 
-### Web Application for Storing Certificates at PLN Nusantara Power
+### Company Profile of Bank BSI Bengkalis
 
 </div>
 
 ## 📙 Description
 
-SiPEKAT is a website that can diagnose diseases in acacia plants through input symptoms and provide treatment so that your plants are healthy and of good quality.
+The BSI Bengkalis Bank Company Profile Web is designed to provide complete and easily accessible information about this bank to customers and potential customers. With intuitive navigation and an attractive appearance, this website is expected to increase the image and trust in Bank BSI Bengkalis.
 
-![SiPEKAT Thumbnail](static/img/Thumbnail.png)
+<!-- ![CP Bank BSI Thumbnail](static/img/Thumbnail.png) -->
 
 ## 📖 Features
 
-Interesting features of SiPEKAT:
+Interesting features of Company Profile Bank BSI Bengkalis:
 
 <!-- 1. **Diagnostic Diseases** : Diagnose acacia plant diseases by selecting the selected symptoms via the checkbox in the list display.
 
