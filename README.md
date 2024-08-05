@@ -18,8 +18,6 @@ The BSI Bengkalis Bank Company Profile Web is designed to provide complete and e
 
 Interesting features of Company Profile Bank BSI Bengkalis:
 
-<!-- 1. **Diagnostic Diseases** : Diagnose acacia plant diseases by selecting the selected symptoms via the checkbox in the list display.
+1. **Dashboard Admin** : Displays visualization of data on the website.
 
-2. **Dashboard Admin** : Displays visualization of data on the website.
-
-3. **CRUD Data** : Can add, view, change and delete Symptoms, Diseases, Settings and Information data. -->
+2. **CRUD Data** : Can add, view, change and delete information data, management structure and activity gallery.
