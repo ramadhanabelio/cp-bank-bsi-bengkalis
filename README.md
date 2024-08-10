@@ -12,7 +12,7 @@
 
 The BSI Bengkalis Bank Company Profile Web is designed to provide complete and easily accessible information about this bank to customers and potential customers. With intuitive navigation and an attractive appearance, this website is expected to increase the image and trust in Bank BSI Bengkalis.
 
-![CP Bank BSI Thumbnail](static/img/BSI Bengkalis.mp4)
+[CP Bank BSI Thumbnail](static/img/BSI Bengkalis.mp4)
 
 ## 📖 Features
 
