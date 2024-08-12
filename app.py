@@ -149,34 +149,39 @@ def admin_informasi():
     cursor = connection.cursor(dictionary=True)
 
     if request.method == 'POST':
-        judul = request.form.get('judul')
-        isi = request.form.get('isi')
-        tanggal = request.form.get('tanggal')
-        file = request.files.get('gambar')
+        if 'add' in request.form:
+            judul = request.form.get('judul')
+            isi = request.form.get('isi')
+            tanggal = request.form.get('tanggal')
+            file = request.files.get('gambar')
 
-        if file and file.filename:
-            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
-        else:
-            filename = None
+            if file and file.filename:
+                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                filename = None
 
-        try:
-            cursor.execute(
-                'INSERT INTO informasi (judul, isi, tanggal, gambar) VALUES (%s, %s, %s, %s)',
-                (judul, isi, tanggal, filename)
-            )
-            connection.commit()
-            flash('Informasi added successfully!', 'success')
-        except Error as e:
-            logging.error(f"Error inserting data: {str(e)}")
-            flash('Error adding informasi', 'danger')
-        finally:
-            cursor.close()
-            connection.close()
+            try:
+                cursor.execute(
+                    'INSERT INTO informasi (judul, isi, tanggal, gambar) VALUES (%s, %s, %s, %s)',
+                    (judul, isi, tanggal, filename)
+                )
+                connection.commit()
+                flash('Informasi added successfully!', 'success')
+            except Error as e:
+                logging.error(f"Error inserting data: {str(e)}")
+                flash('Error adding informasi', 'danger')
 
-    connection = db_connection()
-    cursor = connection.cursor(dictionary=True)
+        elif 'delete' in request.form:
+            informasi_id = request.form.get('id')
+            try:
+                cursor.execute('DELETE FROM informasi WHERE id = %s', (informasi_id,))
+                connection.commit()
+                flash('Informasi deleted successfully!', 'success')
+            except Error as e:
+                logging.error(f"Error deleting data: {str(e)}")
+                flash('Error deleting informasi', 'danger')
+
     cursor.execute('SELECT * FROM informasi')
     informasi_list = cursor.fetchall()
     cursor.close()
@@ -193,50 +198,41 @@ def edit_informasi(id):
     cursor = connection.cursor(dictionary=True)
 
     if request.method == 'POST':
-        judul = request.form['judul']
-        isi = request.form['isi']
-        tanggal = request.form['tanggal']
-        if 'gambar' in request.files:
-            file = request.files['gambar']
-            if file:
-                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                cursor.execute('UPDATE informasi SET judul = %s, isi = %s, tanggal = %s, gambar = %s WHERE id = %s', (judul, isi, tanggal, filename, id))
+        judul = request.form.get('judul')
+        isi = request.form.get('isi')
+        tanggal = request.form.get('tanggal')
+        file = request.files.get('gambar')
+
+        cursor.execute('SELECT gambar FROM informasi WHERE id = %s', (id,))
+        informasi_item = cursor.fetchone()
+        old_gambar = informasi_item['gambar']
+
+        if file and file.filename:
+            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         else:
-            cursor.execute('UPDATE informasi SET judul = %s, isi = %s, tanggal = %s WHERE id = %s', (judul, isi, tanggal, id))
-        connection.commit()
-        cursor.close()
-        connection.close()
-        flash('Informasi updated successfully!', 'success')
+            filename = old_gambar
+
+        try:
+            cursor.execute(
+                'UPDATE informasi SET judul = %s, isi = %s, tanggal = %s, gambar = %s WHERE id = %s',
+                (judul, isi, tanggal, filename, id)
+            )
+            connection.commit()
+            flash('Informasi updated successfully!', 'success')
+        except Error as e:
+            logging.error(f"Error updating data: {str(e)}")
+            flash('Error updating informasi', 'danger')
+
         return redirect(url_for('admin_informasi'))
 
     cursor.execute('SELECT * FROM informasi WHERE id = %s', (id,))
     informasi_item = cursor.fetchone()
+
     cursor.close()
     connection.close()
 
     return render_template('admin/edit_informasi.html', informasi_item=informasi_item)
-
-@app.route('/admin/informasi/delete/<int:id>', methods=['POST'])
-def delete_informasi(id):
-    if 'logged_in' not in session:
-        return redirect(url_for('admin_login'))
-
-    connection = db_connection()
-    cursor = connection.cursor(dictionary=True)
-
-    try:
-        cursor.execute('DELETE FROM informasi WHERE id = %s', (id,))
-        connection.commit()
-        flash('Informasi deleted successfully!', 'success')
-    except Error as e:
-        logging.error(f"Error deleting data: {str(e)}")
-        flash('Error deleting informasi', 'danger')
-    finally:
-        cursor.close()
-        connection.close()
-
-    return redirect(url_for('admin_informasi'))
 
 # Route Admin Struktur
 @app.route('/admin/struktur', methods=['GET', 'POST'])
@@ -248,33 +244,38 @@ def admin_struktur():
     cursor = connection.cursor(dictionary=True)
 
     if request.method == 'POST':
-        nama = request.form.get('nama')
-        posisi = request.form.get('posisi')
-        file = request.files.get('gambar')
+        if 'add' in request.form:
+            nama = request.form.get('nama')
+            posisi = request.form.get('posisi')
+            file = request.files.get('gambar')
 
-        if file and file.filename:
-            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
-        else:
-            filename = None
+            if file and file.filename:
+                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                filename = None
 
-        try:
-            cursor.execute(
-                'INSERT INTO struktur (nama, posisi, gambar) VALUES (%s, %s, %s)',
-                (nama, posisi, filename)
-            )
-            connection.commit()
-            flash('Struktur added successfully!', 'success')
-        except Error as e:
-            logging.error(f"Error inserting data: {str(e)}")
-            flash('Error adding struktur', 'danger')
-        finally:
-            cursor.close()
-            connection.close()
+            try:
+                cursor.execute(
+                    'INSERT INTO struktur (nama, posisi, gambar) VALUES (%s, %s, %s)',
+                    (nama, posisi, filename)
+                )
+                connection.commit()
+                flash('Struktur added successfully!', 'success')
+            except Error as e:
+                logging.error(f"Error inserting data: {str(e)}")
+                flash('Error adding struktur', 'danger')
 
-    connection = db_connection() 
-    cursor = connection.cursor(dictionary=True)
+        elif 'delete' in request.form:
+            struktur_id = request.form.get('id')
+            try:
+                cursor.execute('DELETE FROM struktur WHERE id = %s', (struktur_id,))
+                connection.commit()
+                flash('Struktur deleted successfully!', 'success')
+            except Error as e:
+                logging.error(f"Error deleting data: {str(e)}")
+                flash('Error deleting struktur', 'danger')
+
     cursor.execute('SELECT * FROM struktur')
     struktur_list = cursor.fetchall()
     cursor.close()
@@ -291,49 +292,40 @@ def edit_struktur(id):
     cursor = connection.cursor(dictionary=True)
 
     if request.method == 'POST':
-        nama = request.form['nama']
-        posisi = request.form['posisi']
-        if 'gambar' in request.files:
-            file = request.files['gambar']
-            if file:
-                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                cursor.execute('UPDATE struktur SET nama = %s, posisi = %s, gambar = %s WHERE id = %s', (nama, posisi, filename, id))
+        nama = request.form.get('nama')
+        posisi = request.form.get('posisi')
+        file = request.files.get('gambar')
+
+        cursor.execute('SELECT gambar FROM struktur WHERE id = %s', (id,))
+        struktur_item = cursor.fetchone()
+        old_gambar = struktur_item['gambar']
+
+        if file and file.filename:
+            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         else:
-            cursor.execute('UPDATE struktur SET nama = %s, posisi = %s WHERE id = %s', (nama, posisi, id))
-        connection.commit()
-        cursor.close()
-        connection.close()
-        flash('Struktur updated successfully!', 'success')
+            filename = old_gambar
+
+        try:
+            cursor.execute(
+                'UPDATE struktur SET nama = %s, posisi = %s, gambar = %s WHERE id = %s',
+                (nama, posisi, filename, id)
+            )
+            connection.commit()
+            flash('Struktur updated successfully!', 'success')
+        except Error as e:
+            logging.error(f"Error updating data: {str(e)}")
+            flash('Error updating struktur', 'danger')
+
         return redirect(url_for('admin_struktur'))
 
     cursor.execute('SELECT * FROM struktur WHERE id = %s', (id,))
     struktur_item = cursor.fetchone()
+
     cursor.close()
     connection.close()
 
     return render_template('admin/edit_struktur.html', struktur_item=struktur_item)
-
-@app.route('/admin/struktur/delete/<int:id>', methods=['POST'])
-def delete_struktur(id):
-    if 'logged_in' not in session:
-        return redirect(url_for('admin_login'))
-
-    connection = db_connection()
-    cursor = connection.cursor(dictionary=True)
-
-    try:
-        cursor.execute('DELETE FROM struktur WHERE id = %s', (id,))
-        connection.commit()
-        flash('Struktur deleted successfully!', 'success')
-    except Error as e:
-        logging.error(f"Error deleting data: {str(e)}")
-        flash('Error deleting struktur', 'danger')
-    finally:
-        cursor.close()
-        connection.close()
-
-    return redirect(url_for('admin_struktur'))
 
 # Route Admin Galeri
 @app.route('/admin/galeri', methods=['GET', 'POST'])
@@ -384,23 +376,35 @@ def edit_galeri(id):
     cursor = connection.cursor(dictionary=True)
 
     if request.method == 'POST':
-        keterangan = request.form['keterangan']
-        if 'file' in request.files:
-            file = request.files['file']
-            if file:
-                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                cursor.execute('UPDATE galeri SET foto = %s, keterangan = %s WHERE id = %s', (filename, keterangan, id))
+        keterangan = request.form.get('keterangan')
+        file = request.files.get('file')
+
+        cursor.execute('SELECT foto FROM galeri WHERE id = %s', (id,))
+        galeri_item = cursor.fetchone()
+        old_foto = galeri_item['foto']
+
+        if file and file.filename:
+            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         else:
-            cursor.execute('UPDATE galeri SET keterangan = %s WHERE id = %s', (keterangan, id))
-        connection.commit()
-        cursor.close()
-        connection.close()
-        flash('Galeri updated successfully!', 'success')
+            filename = old_foto
+
+        try:
+            cursor.execute(
+                'UPDATE galeri SET keterangan = %s, foto = %s WHERE id = %s',
+                (keterangan, filename, id)
+            )
+            connection.commit()
+            flash('Galeri updated successfully!', 'success')
+        except Error as e:
+            logging.error(f"Error updating data: {str(e)}")
+            flash('Error updating galeri', 'danger')
+
         return redirect(url_for('admin_galeri'))
 
     cursor.execute('SELECT * FROM galeri WHERE id = %s', (id,))
     galeri_item = cursor.fetchone()
+
     cursor.close()
     connection.close()
 

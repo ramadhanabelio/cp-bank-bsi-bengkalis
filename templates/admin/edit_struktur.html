@@ -15,7 +15,11 @@
   <div class="mb-3">
     <label for="gambar" class="form-label">Gambar</label>
     <input type="file" class="form-control" id="gambar" name="gambar" />
-    <img src="{{ url_for('uploaded_file', filename=struktur_item.gambar) }}" alt="Current Image" width="200" class="img-thumbnail mt-3" />
+    {% if struktur_item.gambar %}
+    <div>
+      <img src="{{ url_for('uploaded_file', filename=struktur_item.gambar) }}" class="img-thumbnail mt-3" alt="Foto" width="200" />
+    </div>
+    {% endif %}
   </div>
   <div class="d-flex justify-content-end">
     <button type="submit" class="btn btn-custom">Simpan</button>
