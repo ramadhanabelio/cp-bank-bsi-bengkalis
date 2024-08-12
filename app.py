@@ -5,6 +5,7 @@ import logging
 import sys
 from dotenv import load_dotenv
 import os
+import uuid
 
 load_dotenv()
 
@@ -154,7 +155,7 @@ def admin_informasi():
         file = request.files.get('gambar')
 
         if file and file.filename:
-            filename = file.filename
+            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
         else:
@@ -198,7 +199,7 @@ def edit_informasi(id):
         if 'gambar' in request.files:
             file = request.files['gambar']
             if file:
-                filename = file.filename
+                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 cursor.execute('UPDATE informasi SET judul = %s, isi = %s, tanggal = %s, gambar = %s WHERE id = %s', (judul, isi, tanggal, filename, id))
         else:
@@ -252,7 +253,7 @@ def admin_struktur():
         file = request.files.get('gambar')
 
         if file and file.filename:
-            filename = file.filename
+            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
         else:
@@ -295,7 +296,7 @@ def edit_struktur(id):
         if 'gambar' in request.files:
             file = request.files['gambar']
             if file:
-                filename = file.filename
+                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 cursor.execute('UPDATE struktur SET nama = %s, posisi = %s, gambar = %s WHERE id = %s', (nama, posisi, filename, id))
         else:
@@ -348,7 +349,7 @@ def admin_galeri():
             file = request.files['file']
             keterangan = request.form['keterangan']
             if file:
-                filename = file.filename
+                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 try:
                     cursor.execute('INSERT INTO galeri (foto, keterangan) VALUES (%s, %s)', (filename, keterangan))
@@ -374,30 +375,6 @@ def admin_galeri():
 
     return render_template('admin/galeri.html', galeri_list=galeri_list, active_page='galeri')
 
-@app.route('/admin/galeri/<int:id>', methods=['POST'])
-def update_galeri(id):
-    if 'logged_in' not in session:
-        return redirect(url_for('admin_login'))
-
-    connection = db_connection()
-    cursor = connection.cursor(dictionary=True)
-
-    if request.method == 'POST':
-        keterangan = request.form['keterangan']
-        if 'file' in request.files:
-            file = request.files['file']
-            if file:
-                filename = file.filename
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                cursor.execute('UPDATE galeri SET foto = %s, keterangan = %s WHERE id = %s', (filename, keterangan, id))
-        else:
-            cursor.execute('UPDATE galeri SET keterangan = %s WHERE id = %s', (keterangan, id))
-        connection.commit()
-        cursor.close()
-        connection.close()
-        flash('Galeri updated successfully!', 'success')
-    return redirect(url_for('admin_galeri'))
-
 @app.route('/admin/galeri/edit/<int:id>', methods=['GET', 'POST'])
 def edit_galeri(id):
     if 'logged_in' not in session:
@@ -411,7 +388,7 @@ def edit_galeri(id):
         if 'file' in request.files:
             file = request.files['file']
             if file:
-                filename = file.filename
+                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 cursor.execute('UPDATE galeri SET foto = %s, keterangan = %s WHERE id = %s', (filename, keterangan, id))
         else:
